@@ -1,0 +1,109 @@
+% Style (ACM)
+\usepackage[tt=false, type1=true]{libertine} 
+\usepackage[varqu]{zi4} 
+\usepackage[libertine]{newtxmath}
+
+% Section and subsection environment tweaks.
+
+\newcommand{\@ACMsectionfont}{}
+\newcommand{\sectionfont}[1]{\renewcommand{\@ACMsectionfont}{#1}}
+\renewcommand\section{\@startsection {section}{1}{\z@}%
+                {-1.0ex}%
+                {1.0ex}%
+                {\reset@font\Large\sffamily\bfseries\@ACMsectionfont}}
+\renewcommand\subsection{\@startsection{subsection}{2}{\z@}%
+                {-1.0ex}%
+                {1.0ex}%
+                {\reset@font\large\sffamily\bfseries\@ACMsectionfont}}
+\renewcommand\subsubsection{\@startsection{subsubsection}{3}{\z@}%
+                {-1.0ex}%
+                {1.0ex}%
+                {\reset@font\normalsize\sffamily\bfseries\@ACMsectionfont}}
+
+% Paragraph and subparagraph environment tweaks.
+
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+                {2.05ex}%
+                {-1em}%
+                {\reset@font\normalsize\sffamily\bfseries\@ACMsectionfont}}
+\renewcommand\subparagraph{\@startsection{subparagraph}{5}{\parindent}%
+                {3.25ex \@plus1ex \@minus .2ex}%
+                {-1em}%
+                {\reset@font\normalsize\sffamily\bfseries\@ACMsectionfont}}
+
+% no labels in bibliography.
+
+\def\@biblabel#1{}
+
+% bibitems are flush left, with successive lines indented by 1em.
+
+\newlength{\bibhang}
+\setlength{\bibhang}{1em}
+
+\def\thebibliography#1{%
+  \section*{%
+    \refname\@mkboth{\sl\uppercase{\refname}}{\sl\uppercase{\refname}}}
+  \list{\relax}{\setlength{\labelsep}{0em}
+                \setlength{\itemindent}{-\bibhang}
+                \setlength{\leftmargin}{\bibhang}}
+  \def\newblock{\hskip .11em plus .33em minus .07em}
+  \sloppy\clubpenalty4000\widowpenalty4000
+  \sfcode`\.=1000\relax}
+
+\def\@citex[#1]#2{\if@filesw\immediate\write\@auxout{\string\citation{#2}}\fi
+  \def\@citea{}\@cite{\@for\@citeb:=#2\do
+    {\@citea\def\@citea{; }\@ifundefined
+      {b@\@citeb}{{\bf ?}\@warning
+      {Citation '\@citeb' on page \thepage \space undefined}}%
+{\csname b@\@citeb\endcsname}}}{#1}}
+
+\let\@internalcite\cite
+\def\cite{\def\citename##1{##1}\@internalcite}
+\def\shortcite{\def\citename##1{}\@internalcite}
+
+% title stuff...
+
+\newcommand{\@ACMempty}{}
+
+\newcommand{\@ACMaffiliation}{}
+\newcommand{\affiliation}[1]{\gdef\@ACMaffiliation{#1}}
+
+\newcommand{\@ACMteaser}{}
+\newcommand{\teaser}[1]{\gdef\@ACMteaser{#1}}
+
+\newlength{\titlespace}
+\setlength{\titlespace}{0.25in}
+
+\newlength{\teaserspace}
+\setlength{\teaserspace}{0.25in}
+
+\renewcommand{\@maketitle}{%
+    \begin{center}%
+        {\LARGE\sffamily\bfseries\@ACMsectionfont \@title \par}%
+        \vspace{1\baselineskip}%
+        \large
+        \begin{tabular}[t]{c}%
+            \@author
+        \end{tabular}\par%
+        \ifx\@ACMaffiliation\@ACMempty \else%
+            \vspace{0.5\baselineskip}%
+            \@ACMaffiliation\par%
+        \fi%
+        \vspace{\titlespace}%
+        \ifx\@ACMteaser\@ACMempty \else%
+            \begingroup%
+                \def\@captype{figure}%
+                \@ACMteaser%
+            \endgroup\par%
+            \vspace{\teaserspace}%
+        \fi%
+    \end{center} \par%
+}
+
+\usepackage{titlesec}
+
+\titlespacing*{\section}{0pt}{5.5ex plus 1ex minus .2ex}{2ex}
+\titlespacing*{\subsection}{0pt}{3ex}{2ex}
+\setcounter{secnumdepth}{4}
+\renewcommand\theparagraph{\thesubsubsection. \arabic{paragraph}}
+\newcommand\subsubsubsection{\paragraph}
