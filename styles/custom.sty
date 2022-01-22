@@ -12,16 +12,25 @@
 \usepackage{float} % \begin{figure}[H] ... \end{figure}
 \usepackage{xcolor} % Colour
 
+\usepackage{tabularx} % Table
+\usepackage[UKenglish]{babel} % Date formatting
+\usepackage[UKenglish]{isodate} % Date formatting
+\usepackage{breakcites} % Break the citation to multiple lines if necessary
+
 % Math Packages
 \usepackage{amsmath, amssymb, amsthm}
 \usepackage{tikz-cd} % Commutative Diagram
 \usepackage{mathpartir} % Inference Rule
+\usepackage{stmaryrd} % Symbols such as \llbracket (denotation)
 
 % Math Headers
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
+\newtheorem{example}{Example}[section]
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{corollary}{Corollary}[theorem]
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{proposition}[theorem]{Proposition}
 
+% Code
+\usepackage{listings}
